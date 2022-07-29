@@ -1,0 +1,167 @@
+<div class="containerRegister p-2">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header bg-blue-dark">
+          <h4 class="m-b-0 text-white">Actualizar Departamento</h4>
+        </div>
+        <div class="card-body">
+          <form
+            (ngSubmit)="actualizarDepartament()"
+            [formGroup]="departamentForm"
+            class="form-horizontal"
+          >
+            <div class="form-body">
+              <h3 class="box-title">Información Actualizar</h3>
+              <hr class="m-t-0 m-b-40" />
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Nombre</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Recursos Humanos"
+                        formControlName="departamento"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Pais</label
+                    >
+                    <div class="col-md-9">
+                      <select id="setIDPais"
+                        class="form-control custom-select"
+                        formControlName="idPais"
+                      >  
+                        <option value="">Selecciona un pais</option>
+                        <option
+                          [value]="item.idPais"
+                          *ngFor="let item of paises"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Provincia</label
+                    >
+                    <div class="col-md-9">
+                      <select
+                        class="form-control custom-select"
+                        data-placeholder="Choose a Category"
+                        tabindex="1"
+                        (change)="selectProvincia($event)"
+                        formControlName="idPronvincia"
+                      >
+                        <option value="" (select)="(true)" disabled="disabled">
+                          Seleccione una Provincia
+                        </option>
+                        <option
+                          [value]="item.idProvincia"
+                          *ngFor="let item of provincias"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!--/span-->
+              </div>
+
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Canton</label
+                    >
+                    <div class="col-md-9">
+                      <select
+                        class="form-control custom-select"
+                        (change)="selectCanton($event)"
+                        formControlName="idCanton"
+                      >
+                        <option value="" (select)="(true)">
+                          Seleccione un Canton
+                        </option>
+                        <option
+                          [value]="item.idCanton"
+                          *ngFor="let item of cantones"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!--/span-->
+              </div>
+
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Distrito</label
+                    >
+                    <div class="col-md-9">
+                      <select
+                       
+                        class="form-control custom-select"
+                        formControlName="idDistritoDep"
+                      >
+                        <option value="" (select)="(true)">
+                          Seleccione un Distrito
+                        </option>
+                        <option
+                          [value]="item.idDistritoDep"
+                          *ngFor="let item of distritos"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!--/span-->
+              </div>
+            </div>
+            <hr />
+            <div class="modal-footer">
+                <a 
+                  (click)="cerrarModal2()"
+                  class="btn btn-secondary"
+                  
+                >
+                  Cerrar
+              </a>
+                <input
+                  type="submit"
+                  class="btn bg-blue-dark text-light"
+                  value="Agregar"
+                />
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

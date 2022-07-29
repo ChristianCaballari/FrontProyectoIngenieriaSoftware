@@ -1,0 +1,27 @@
+.containerTable{
+     max-width: 1200px;
+     margin: 0 auto;
+}
+.bg-blue-dark{
+     background: #0f3959;
+}
+.mt-chris{
+     margin-bottom: 1rem;
+}
+.fa-pencil{
+     font-size: 25px;
+     color: #0f3959;
+     cursor: pointer;
+}
+.fa-close{
+     font-size: 25px;
+     cursor: pointer;
+}
+.fa-trash-can{
+     font-size: 25px;
+     cursor: pointer;
+     color: red;
+}
+.m-rChris{
+     margin-left: 20px;
+}

@@ -1,0 +1,68 @@
+<!-- Aplicando offcanvas a menu -->
+<div class="row fija">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-blue-dark">
+    <div class="container">
+      <!-- Icono o titulo -->
+      <a class="navbar-brand" href="#">{{nombre}} {{apellido}}</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample2"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div
+        class="offcanvas offcanvas-start bg-blue-dark text-white"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
+        id="offcanvasExample2"
+      >
+        <!-- Header -->
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{nombre}} {{apellido}}</h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="offcanvas-body">
+          <!-- Enlaces -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item" *ngFor="let item of menuItems" >
+              <a 
+                class="nav-link"
+                [routerLink]="item.url"
+                [routerLinkActive]="['active', 'active2']"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                {{ item.titulo }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLinkActive]="['active', 'active2']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="logout()"
+              >
+                Salir
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <img  *ngIf="foto" [src]="foto"
+      class="w45Foto foto">
+    </div>
+  </nav>
+</div>

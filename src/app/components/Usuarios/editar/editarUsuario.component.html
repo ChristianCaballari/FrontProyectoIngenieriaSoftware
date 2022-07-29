@@ -1,0 +1,142 @@
+<div class="containerRegister p-7">
+    <div class="row">
+         <div class="col-lg-12">
+             <div class="card">
+                 <div class="card-header bg-blue-dark">
+                     <h4 class="m-b-0 text-white">Actualizar Usuario</h4>
+                 </div>
+                 <div class="card-body">
+                     <form (ngSubmit)="actualizarUsuario()"
+                     [formGroup]="usuarioFormRegister">
+                         <div class="form-body">
+                             <h3 class="card-title">Informacion del Usuario</h3>
+                             <hr>
+                             <div class="row p-t-20">
+                                 <div class="col-md-6">
+                                     <div class="form-group">
+                                         <label class="control-label">Nombre</label>
+                                         <input type="text" id="nombre" class="form-control
+                                         "
+                                         formControlName="nombre"
+                                         >
+                                         <small class="form-control-feedback">  </small> </div>
+                                 </div>
+                                 <!--/span-->
+                                 <div class="col-md-6">
+                                     <div class="form-group has-danger">
+                                         <label class="control-label">Apellidos</label>
+                                         <input type="text" id="apellidos" class="form-control form-control-danger"
+                                         formControlName="apellidos"
+                                         >
+                                         <small class="form-control-feedback"> </small> </div>
+                                 </div>
+                                 <!--/span-->
+                             </div>
+                             <!--/row-->
+                             <div class="row">
+                                 <div class="col-md-6">
+                                     <div class="form-group has-success">
+                                         <label class="control-label">Genero</label>
+                                         <select class="form-control custom-select"
+                                         formControlName="idSexo"
+                                         >
+                                            <option
+                                            [value]="item.idSexo"
+                                            *ngFor="let item of sexos">
+                                            {{ item.descripcion }}
+                                        </option>
+                                         </select>
+                                        </div>
+                                 </div>
+                                 <!--/span-->
+                                 <div class="col-md-6">
+                                     <div class="form-group">
+                                         <label class="control-label">Cedula</label>
+                                         <input type="text" class="form-control" 
+                                         formControlName="cedula"
+                                         >
+                                     </div>
+                                 </div>
+                                 
+                                 <!--/span-->
+                             </div>
+                             <!--/row-->
+                             <div class="row">
+                                 <div class="col-md-6">
+                                     <div class="form-group">
+                                         <label class="control-label">Departamento</label>
+                                         <select class="form-control custom-select"
+                                         formControlName="idDepartamento"
+                                         >       
+                                        <option
+                                            [value]="item.idDepartamento"
+                                            *ngFor="let item of departamentos">
+                                            {{ item.descripcion }}
+                                        </option>
+                                        
+                                        </select>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label class="control-label">Fecha Vencimiento</label>
+                                      <input type="date" class="form-control"
+                                      formControlName="fechaVencimiento"
+                                      >
+                                  </div>
+                              </div>
+                                 <!--/span-->
+                             </div>
+    
+                             <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="control-label">Email</label>
+                                          <input type="text" class="form-control" 
+                                          formControlName="correo"
+                                          >
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                   <div class="form-group">
+                                       <label class="control-label">Celular</label>
+                                       <input type="text" class="form-control"
+                                       formControlName="celular"
+                                       >
+                                   </div>
+                               </div>
+                                  <!--/span-->
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="control-label">Contrasenia</label>
+                                          <input type="password" class="form-control" 
+                                          formControlName="password"
+                                          
+                                          >
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                   <div class="form-group">
+                                       <label class="control-label">Foto</label>
+                                                <input class="form-control" name="file" type="file" multiple
+                                                (change)="getBase64($event)"
+                                                />
+                                       </div>
+                                   </div>
+                               </div>
+                                  <!--/span-->
+                              </div>
+                       
+                         <div class="form-actions p-2">
+                             <input type="submit" class="btn bg-blue-dark text-light" value="Registrar"/>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+    </div>
+

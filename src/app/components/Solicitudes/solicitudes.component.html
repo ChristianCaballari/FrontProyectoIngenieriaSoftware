@@ -1,0 +1,266 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<div id="comentarios" class="contenedor">
+  <p>
+    <button
+      type="button"
+      class="btn bg-blue-dark text-light margin-rigth"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Generar Solicitud
+    </button>
+  </p>
+
+
+  <div class="timeline">
+    <ul *ngFor="let solicitud of solicitudes">
+      <li class="bg-comentario">
+        <div class="content">
+          <h3 class="descripcion">{{ solicitud.descripcion }}</h3>
+          <p class="solicitud">{{ solicitud.asuntoDetallado }}</p>
+          <span class="fecha">{{ solicitud.fechaHora }}</span>
+          <div class="d-flex" *ngIf="solicitud.idRespuestaLegal !='2'" >
+            <a
+              class="margin-rigth"
+              (click)="agregarArchivo(solicitud)"
+              data-bs-toggle="modal"
+              data-bs-target="#ArchivoModal"
+              ><i class="fa-solid fa-cloud-arrow-up font-size-icon"></i
+            ></a>
+            <a class="margin-rigth" (click)="getSolicitudActualizar(solicitud)"
+              ><i class="fa-solid fa-square-pen font-size-icon"></i
+            ></a>
+            <a class="margin-rigth" (click)="eliminarSolicitud(solicitud)"
+              ><i class="fa-solid fa-trash-can font-size-icon"></i
+            ></a>
+          </div>
+        </div>
+        <div class="time">
+          <div class="d-flexSoli">
+          <span class="usuario">{{solicitud.nombre}} {{solicitud.apellido}} </span>
+          <img  *ngIf="solicitud.foto" [src]="solicitud.foto"
+            class="w45Foto fotoSoli">
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="content">
+          <h3 class="descripcion">{{ solicitud.descripcion }} ({{solicitud.respuestaLegal}})</h3>
+          <p class="solicitud">{{ solicitud.destalleRespuesta }}</p>
+          <span class="fecha">{{ solicitud.fechaHoraRespuesta }}</span>
+        </div>
+
+        <div class="time">
+          <span class="usuario">Admin</span>
+        </div>
+      </li>
+      <div style="clear: both"></div>
+    </ul>
+  </div>
+  <!-- <div id="comentarios" class="contenedor">
+    <div class="contenedor-comentario" *ngFor="let solicitud of solicitudes">
+      <img  *ngIf="solicitud.foto" [src]="solicitud.foto"
+      class="w45Foto foto margin-rigth">
+        <div class="contenido-comentario">
+          <h3 class="descripcion">{{ solicitud.descripcion }}</h3>
+          <p class="solicitud">{{ solicitud.asuntoDetallado }}</p>
+          <span class="fecha">{{ solicitud.fechaHora }}</span>
+          <div class="d-flex">
+            <a
+              class="margin-rigth"
+              (click)="agregarArchivo(solicitud)"
+              data-bs-toggle="modal"
+              data-bs-target="#ArchivoModal"
+              ><i class="fa-solid fa-cloud-arrow-up font-size-icon"></i
+            ></a>
+            <a class="margin-rigth" (click)="getSolicitudActualizar(solicitud)"
+              ><i class="fa-solid fa-square-pen font-size-icon"></i
+            ></a>
+            <a class="margin-rigth" (click)="eliminarSolicitud(solicitud)"
+              ><i class="fa-solid fa-trash-can font-size-icon"></i
+            ></a>
+          </div>
+
+            <div class="contenedor-comentario segundo-nivel">
+                <img src="img/comentario.jpg" class="avatar">
+                <div class="contenido-comentario">
+                    <p>Pendiente de respuesta
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+  <!-- Modal -->
+  <div
+    class="modal fade modal-open"
+    id="staticBackdrop"
+    #botonAbrir
+    data-bs-keyboard="true"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header text-light bg-blue-dark">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            Generar Solicitud
+          </h5>
+          <a
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></a>
+        </div>
+        <div class="modal-body">
+          <form
+            (ngSubmit)="agregarSolicitud()"
+            [formGroup]="solicitudFormRegister"
+          >
+            <div class="mb-3">
+              <label for="palabra" class="form-label">Palabra Clave</label>
+              <input
+                type="text"
+                class="form-control"
+                id="palabra"
+                placeholder="Palabra Clave"
+                formControlName="palabraClave"
+              />
+            </div>
+            <div class="mb-3">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="idClasificador"
+              >
+                <option  value="" selected>Seleccine Clasificador</option>
+                <option
+                  *ngFor="let clasificador of clasificadores"
+                  [value]="clasificador.idClasificador"
+                >
+                  {{ clasificador.descripcion }}
+                </option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="asunto" class="form-label">Asunto solicitud</label>
+              <textarea
+                class="form-control"
+                id="asunto"
+                rows="3"
+                formControlName="asuntoDetallado"
+              ></textarea>
+            </div>
+            <div class="modal-footer">
+              <a 
+                (click)="cerrarModal2()"
+                class="btn btn-secondary"
+                
+              >
+                Cerrar
+            </a>
+              <input
+                type="submit"
+                class="btn bg-blue-dark text-light"
+                value="Agregar"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="ArchivoModal"
+    tabindex="-1"
+    aria-labelledby="modalArchivos"
+    aria-hidden="true"
+    #botonAbrirDropzone
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-blue-dark">
+          <h5 class="modal-title text-light" id="modalArchivos">
+            Agregar Archivos
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form (ngSubmit)="convertFileBase64()"
+        [formGroup]="archivoRegister">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="asunto" class="form-label"
+              >Clasificador : {{ clasificadorArchivo }}</label
+            >
+          </div>
+         
+          <div
+            class="custom-dropzone"
+            ngx-dropzone
+            [accept]="'image/*,application/pdf'"
+            (change)="onSelect($event)"
+          >
+            <ngx-dropzone-label>
+              <div>
+                <h2>Agrega tus Archivos</h2>
+              </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of files"
+              [file]="f"
+              [removable]="true"
+              (removed)="onRemove(f)"
+            >
+              <ngx-dropzone-label
+                >{{ f.name }} ({{ f.type }})</ngx-dropzone-label
+              >
+            </ngx-dropzone-image-preview>
+          </div>
+              <input type="hidden" formControlName="idSolicitud"/>
+          <div class="mb-3">
+            <label for="asunto" class="form-label">Descripción</label>
+            <textarea class="form-control" id="asunto" rows="3"
+            formControlName="comentario"
+            ></textarea>
+          </div>
+          <input type="hidden"  formControlName="nombre">
+          <input type="hidden"  formControlName="tipo">
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
+          <button type="submit" class="btn bg-blue-dark text-light">
+            Agregar
+          </button>
+          
+        </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>

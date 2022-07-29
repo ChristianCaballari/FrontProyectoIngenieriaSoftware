@@ -1,0 +1,283 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<div class="row containerTable p-5">
+  <div class="justify-content-center align-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Solicitudes Usuarios</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="w45Foto">Foto</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th class="w100">Usuario</th>
+                  <th class="text-nowrap w100">Solicitudes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let solicitud of solicitudes">
+                  <td class="text-center">
+                    <img
+                      *ngIf="solicitud.foto"
+                      [src]="solicitud.foto"
+                      class="w45Foto foto"
+                    />
+                  </td>
+                  <td>{{ solicitud.nombreUsuario }}</td>
+                  <td>{{ solicitud.apellidoUsuario }}</td>
+                  <td *ngIf="solicitud.rol.trim() == 'USER-ROL'">Normal</td>
+                  <td class="text-nowrap text-center">
+                    <a
+                      data-toggle="tooltip"
+                      (click)="showChat(solicitud)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#ArchivoModal"
+                    >
+                      <div *ngIf="solicitud.solicitudSinResponder != '0'">
+                        <i class="fa-solid fa-message"
+                          ><span class="sinSolicitud">{{
+                            solicitud.solicitudSinResponder
+                          }}</span></i
+                        >
+                        <div class="notify">
+                          <span class="heartbit"></span>
+                          <span class="point"></span>
+                        </div>
+                      </div>
+                      <div *ngIf="solicitud.solicitudSinResponder === '0'">
+                        <i class="fa-solid fa-message"></i>
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="ArchivoModal"
+  tabindex="-1"
+  aria-labelledby="modalArchivos"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-blue-dark">
+        <h5 class="modal-title text-light" id="modalArchivos">
+          Chat solicitudes
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body scroll">
+        <div class="timeline">
+          <ul *ngFor="let solicitud of solicitudesPersonales">
+            <li class="bg-comentario">
+              <div class="content">
+                <div class="flex">
+                  <h3 class="descripcion">{{ solicitud.descripcion }}</h3>
+                  <p class="solicitud">{{ solicitud.asuntoDetallado }}</p>
+                  <span class="fecha">{{ solicitud.fechaHora }}</span>
+                  <a
+                    class="margin-rigth text-blue"
+                    (click)="VerDetalles(solicitud)"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Ver detalles"
+                    data-bs-target="#staticBackdropDetalles"
+                    data-bs-toggle="modal"
+                    ><i class="fa-solid fa-circle-info"></i>
+                    Detalles</a
+                  >
+                </div>
+              </div>
+              <div class="time">
+                <div class="d-flexSoli">
+                  <span class="usuario"
+                    >{{ solicitud.nombre }} {{ solicitud.apellido }}
+                  </span>
+                  <img
+                    *ngIf="solicitud.foto"
+                    [src]="solicitud.foto"
+                    class="w45Foto fotoSoli"
+                  />
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="content">
+                <h3 class="descripcion">{{ solicitud.descripcion }}</h3>
+                <p class="solicitud">{{ solicitud.destalleRespuesta }}</p>
+                <span class="fecha">{{ solicitud.fechaHoraRespuesta }}</span>
+                <a
+                  *ngIf="solicitud.idRespuestaLegal != '2'"
+                  class="btn bg-blue-dark1 text-light d-block"
+                  data-bs-target="#staticBackdrop"
+                  data-bs-toggle="modal"
+                  (click)="agregarDatosInputHidden(solicitud)"
+                  >Responder</a
+                >
+              </div>
+
+              <div class="time">
+                <span class="usuario">Admin</span>
+              </div>
+            </li>
+            <div style="clear: both"></div>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- data-bs-target="#staticBackdrop" -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  tabindex="-1"
+  aria-hidden="true"
+  #botonAbrir
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-blue-dark1 text-light">
+        <h5 class="modal-title" id="staticBackdropLabel">Respuesta Legal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <form
+            (ngSubmit)="agregarRespuesta()"
+            [formGroup]="solicitudRespuestaForm"
+          >
+            <div class="flex">
+              <input type="hidden" formControlName="idUsuarioRespuesta" />
+              <input type="hidden" formControlName="idSolicitud" />
+              <input type="hidden" formControlName="idUsuario" />
+              <input type="hidden" formControlName="idRespuestaLegal" />
+
+              <input
+                type="text"
+                class="form-control d-block flex-hijo mb-3"
+                placeholder="Responder"
+                formControlName="detalleRespuesta"
+              />
+              <select
+                formControlName="idRespuestaLegal"
+                class="form-control mb-3 d-block flex-hijo"
+                [ngClass]="
+                  solicitudRespuestaForm.value.idRespuestaLegal == '1'
+                    ? 'selectRed'
+                    : 'selectGreen'
+                "
+              >
+                <option value="1" class="selectRed">Pendiente</option>
+                <option value="2" class="selectGreen">Resuelto</option>
+                <option value="3" class="selectAmpli">Ampliar</option>
+              </select>
+
+              <button
+                type="submit"
+                class="bg-blue-dark1 text-light flex-hijo mb-3"
+              >
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  Detalles-->
+<!-- data-bs-target="#staticBackdrop" -->
+<div
+  class="modal fade"
+  id="staticBackdropDetalles"
+  tabindex="-1"
+  aria-hidden="true"
+  #botonAbrir
+>
+  <div class="modal-dialog  modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header bg-blue-dark1 text-light">
+        <h5 class="modal-title amarillo" id="staticBackdropLabel">{{solicitudDetalles.nombre}} {{solicitudDetalles.apellidos}}</h5>
+        <img [src]="solicitudDetalles.foto" class="foto" alt="...">
+        <!-- <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button> -->
+      </div>
+     
+        <div class="input-group mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title t-blue">{{solicitudDetalles.descripcion}}</h5>
+              <p class="card-text"> &#x2756; <span  class="amarillo">Asunto:</span>
+                <span class="t-blue"> {{solicitudDetalles.asuntoDetallado}}</span></p>
+             <div *ngFor="let item of cambiosSolicitud">
+              <p >
+                &#x2756; <span class="amarillo">Respuesta Legal:</span> <span class="t-blue"> {{item.respuestaLegal}} </span> 
+              </p>
+              <p >
+                &#x2756; <span  class="amarillo">Cambios: </span><span class="t-blue">{{item.cantidadCambios}} </span>
+              </p>
+              <p >
+                &#x2756;<span  class="amarillo"> Archivos:</span><span class="t-blue"> {{item.cantidadArchivos}} </span>
+              </p>
+            </div>
+            </div>
+            <ul class="list-group list-group-flush" *ngFor="let item of archivosSolicitudes">
+               
+              <div class="d-flexDownloadArchivo list-group-item">
+                &#x2751; {{item.nombre}}
+              <a  (click)="descargar(item)"><i class="fa-solid fa-file-arrow-down"></i></a>
+            </div>
+             
+            </ul>
+          </div>
+        </div>
+        <!-- <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      >Cerrar</button> -->
+    </div>
+  </div>
+</div>

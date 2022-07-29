@@ -1,0 +1,182 @@
+<div class="containerRegister p-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header bg-blue-dark">
+          <h4 class="m-b-0 text-white">Registrar Departamento</h4>
+        </div>
+        <div class="card-body">
+          <form #departamentoForm="ngForm"
+            (ngSubmit)="registrarDepartamento(departamentoForm)"
+            class="form-horizontal"
+          >
+            <div class="form-body">
+              <h3 class="box-title">Información Agregar</h3>
+              <hr class="m-t-0 m-b-40" />
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Nombre</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Recursos Humanos"
+                        name="departamento"
+                        #descripcion="ngModel"
+                        [(ngModel)]="departamentInsert.departamento"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Pais</label
+                    >
+                    <div class="col-md-9">
+                      <select
+                        class="form-control custom-select"
+                        name="idPais"
+                        #idPais="ngModel"
+                        [(ngModel)]="departamentInsert.idPais"
+                      >
+                        <option value="" (select)="(true)" disabled="disabled">
+                          Seleccione una Pais
+                        </option>
+                        <option
+                          [value]="item.idPais"
+                          *ngFor="let item of paises"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Provincia</label
+                    >
+                    <div class="col-md-9">
+                      <select
+                        class="form-control custom-select"
+                        data-placeholder="Choose a Category"
+                        tabindex="1"
+                        (change)="selectProvincia($event)"
+                        name="idPronvincia"
+                        #idPronvincia="ngModel"
+                        [(ngModel)]="departamentInsert.idPronvincia"
+                      >
+                        <option value="" (select)="(true)" disabled="disabled">
+                          Seleccione una Provincia
+                        </option>
+                        <option
+                          [value]="item.idProvincia"
+                          *ngFor="let item of provincias"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!--/span-->
+              </div>
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Canton</label
+                    >
+                    <div class="col-md-9">
+                      <select
+                        id="idCanton"
+                        name="selected"
+                        [disabled]="isDesactiveCanton"
+                        class="form-control custom-select"
+                        data-placeholder="Choose a Category"
+                        tabindex="1"
+                        (change)="selectCanton($event)"
+                        name="idCanton"
+                        #idCanton="ngModel"
+                        [(ngModel)]="departamentInsert.idCanton"
+                      >
+                        <option value="" (select)="(true)" >
+                          Seleccione una Canton
+                        </option>
+                        <option
+                          [value]="item.idCanton"
+                          *ngFor="let item of cantones"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!--/span-->
+              </div>
+
+              <!--/row-->
+              <div class="row p-2">
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-2"
+                      >Distrito</label
+                    >
+                    <div class="col-md-9">
+                      <select [disabled]="isDesactiveDistrito"
+                        class="form-control custom-select"
+                        data-placeholder="Choose a Category"
+                        tabindex="1"
+                        name="idDistritoDep"
+                        #idDistritoDep="ngModel"
+                        [(ngModel)]="departamentInsert.idDistritoDep"
+                      >
+                        <option value="" (select)="(true)">
+                          Seleccione un Distrito
+                        </option>
+                        <option
+                          [value]="item.idDistritoDep"
+                          *ngFor="let item of distritos"
+                        >
+                          {{ item.descripcion }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!--/span-->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a 
+                (click)="cerrarModal2()"
+                class="btn btn-secondary"
+                
+              >
+                Cerrar
+            </a>
+              <input
+                type="submit"
+                class="btn bg-blue-dark text-light"
+                value="Agregar"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

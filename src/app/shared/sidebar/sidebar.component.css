@@ -1,0 +1,42 @@
+
+
+.navbar .nav-item .nav-link:hover{
+     color: #FAAF38!important;
+}
+.navbar .nav-item .nav-link{
+     position: relative;
+     /* padding: 0 20px; */
+     transition: all .5s;
+}
+
+.navbar .nav-item .nav-link::before{
+     content: '';
+     width: 0;
+     height: 2px;
+     background: #FAAF38;
+     position: absolute;
+     bottom: -5px;
+     transition: all .5s;
+}
+
+
+.navbar .nav-item .nav-link:hover::before{
+     width: 40%;
+}
+.bg-blue-dark{
+     background: #0f3959;
+}
+.offcanvas{
+     width: 200px;
+}
+
+
+.active2{
+     color:#FAAF38!important;
+}
+a{
+     cursor: pointer;
+}
+
+
+

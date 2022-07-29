@@ -1,0 +1,69 @@
+<div class="row containerTable p-5">
+     <div class="justify-content-center align-content-center">
+     <div class="col-12">
+          <div class="card">
+              <div class="card-body">
+                  <!-- <h4 class="card-title">Departamentos</h4>
+                  <h6 class="card-subtitle">Departamentos Registrados</h6> -->
+
+                    <a
+                      class="btn bg-blue-dark mt-chris text-light"
+                      (click)="cargarFormularioRegistro()">Registrar
+                    </a>
+                  <div class="table-responsive">
+                      <table class="table table-bordered">
+                          <thead>
+                              <tr>
+                                <th class="w45Foto">Foto</th>
+                                  <th>Nombre</th>
+                                  <th>Apellidos</th>
+                                  <th class="w100">Cedula</th>
+                                  <th class="w100">Rol</th>
+                                  <th class="text-nowrap w100">Acciones</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let user of usuarios">
+                                  <td  class="text-center">
+                                    <img  *ngIf="!user.foto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHaWOWKb7SuIE2VGIVIWFRvE56uTWLqzldzw&usqp=CAU"
+                                    class="w45Foto foto">
+                                    <img  *ngIf="user.foto" [src]="user.foto"
+                                    class="w45Foto foto">
+                                  </td>
+                                  <td>{{user.nombre}}</td>
+                                  <td>{{user.apellidos}}</td>
+                                  <td>{{user.cedula}}</td>
+                                  <td>
+                                    <select class="form-control"
+                                    [(ngModel)]="user.rol"
+                                    (change)="actualizarRol(user)">
+                                      <option value="ADMIN-ROL">Admin</option>
+                                      <option 
+                                      value="USER-ROL">Usuario</option>
+                                    </select>
+                                  </td>
+                                  <td class="text-nowrap text-center">
+                                      <a (click)="cargarDatosActualizar(user)" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10 m-rChris"></i> </a>
+
+                                      <a  data-toggle="tooltip" data-original-title="Borrar"> <i class="fa-solid fa-trash-can m-rChris"
+                                        (click)="eliminarUsuario(user)"
+                                        ></i> </a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <button (click)="cambiarDePagina(-1)" class="btn bg-blue-dark mt-chris text-light">Anteriores</button>
+                  &nbsp;
+                  <button (click)="cambiarDePagina(1)"class="btn bg-blue-dark mt-chris text-light">Siguientes</button>
+              </div>
+          </div>
+      </div>
+     </div>
+</div>
+  
+
+
+
+
+

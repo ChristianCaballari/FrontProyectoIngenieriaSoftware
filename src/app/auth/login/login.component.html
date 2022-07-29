@@ -1,0 +1,49 @@
+<section>
+  <div class="container">
+    <!-- Info -->
+    <div class="info">
+      <div class="content">
+        <h2 class="text-center">Logueate</h2>
+        <div class="img">
+          <img src="./../../../assets/img/logo.svg" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form (ngSubmit)="loginUser()"
+    autocomplete="off"
+    [formGroup]="loginForm">
+    
+    <div class="form">
+      <h2>Inicio de Sesión</h2>
+     
+      
+        <div class="form-box">
+          <div class="input-box w100">
+            <input type="text"
+            formControlName="email"required/>
+            <span>Email</span>
+          </div>
+
+          <div class="input-box w100">
+            <input type="password"
+            formControlName="password"required />
+            <span>Contraseña</span>
+          </div>
+
+          <div class="row">
+               <div class="col text-danger">
+                    <p *ngIf="campoNoValido('email')">Email Obligatorio (9-30) caracteres</p>
+                    <p *ngIf="campoNoValido('password')">Contraseña Obligatoria (6-20 caracteres)</p>
+               </div>
+          </div>
+          <div class="input-box w100 btn a">
+            <input type="submit" value="Iniciar Sesión" />
+          </div>
+        </div>
+    </div>
+</form>
+  </div>
+</section>

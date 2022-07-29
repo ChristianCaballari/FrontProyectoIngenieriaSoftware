@@ -1,0 +1,90 @@
+/* You can add global styles to this file, and also import other style files */
+.colored-toast.swal2-icon-success {
+     background-color: #a5dc86 !important;
+   }
+   
+   .colored-toast.swal2-icon-error {
+     background-color: #f27474 !important;
+   }
+   
+   .colored-toast.swal2-icon-warning {
+     background-color: #f8bb86 !important;
+   }
+   
+   .colored-toast.swal2-icon-info {
+     background-color: #3fc3ee !important;
+   }
+   
+   .colored-toast.swal2-icon-question {
+     background-color: #87adbd !important;
+   }
+   
+   .colored-toast .swal2-title {
+     color: white;
+   }
+   
+   .colored-toast .swal2-close {
+     color: white;
+   }
+   
+   .colored-toast .swal2-html-container {
+     color: white;
+   }
+
+   .w100{
+    width: 100px;
+   }
+   .w45Foto{
+   width:45px;
+   }
+   .foto{
+    border-radius: 100%;
+    width: 45px;
+   }
+  
+   h2 {
+    text-align: center;
+}
+.contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2rem;
+}
+
+
+/** Comentarios **/
+.contenedor-comentario {
+    display: flex;
+    align-items: flex-start;
+}
+
+.contenedor-comentario .avatar {
+    margin-right: 1rem;
+    /* order: 2; */
+}
+.contenedor-comentario .comentario {
+    flex: 1;
+}
+.segundo-nivel {
+    background-color: #e1e1e1;
+    padding: 1rem;
+}
+.bg-blue-dark{
+    background: #0f3959;
+}
+.bg-blue-dark:hover{
+  color: #eea939!important;
+}
+.margin-rigth{
+    
+    margin-right: 1rem;
+}
+a{
+   cursor: pointer;
+   text-decoration: none;
+}
+
+
+
+   

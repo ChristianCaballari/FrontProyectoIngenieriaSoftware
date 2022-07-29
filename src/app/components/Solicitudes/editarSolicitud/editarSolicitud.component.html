@@ -1,0 +1,51 @@
+<div id="comentarios" class="contenedor">
+     <div class="modal-dialog modal-lg modal-open">
+       <div class="modal-content">
+         <div class="modal-header text-light bg-blue-dark">
+           <h5 class="modal-title" id="staticBackdropLabel">Actualizar Solicitud</h5>
+         </div>
+         <div class="modal-body">
+          <form (ngSubmit)="agregarSolicitud()"
+          [formGroup]="solicitudFormRegister"
+          >
+          <div class="mb-3">
+               <label for="palabra" class="form-label">Palabra Clave</label>
+               <input type="text" class="form-control" id="palabra" placeholder="Palabra Clave"
+               formControlName="palabraClave"
+               >
+             </div>
+             <div class="mb-3">
+               <select class="form-select" aria-label="Default select example"
+               formControlName="idClasificador"
+               >
+                    <option selected>Clasificador</option>
+                    <option *ngFor="let clasificador of clasificadores"
+                     [value]="clasificador.idClasificador"
+                     >{{clasificador.descripcion}}</option>
+                  </select>
+             </div>
+             <div class="mb-3">
+               <label for="asunto" class="form-label">Asunto soliticud</label>
+               <textarea class="form-control" id="asunto" rows="3"
+               formControlName="asuntoDetallado"
+               ></textarea>
+             </div>
+             <div class="modal-footer">
+              <a 
+              (click)="cerrarModal2()"
+              class="btn btn-secondary"
+              
+            >
+              Cerrar
+          </a>
+               <input type="submit" class="btn bg-blue-dark text-light" value="Guardar"/>
+             </div>
+          </form>
+         </div>
+       </div>
+     </div>
+
+
+
+   
+   
